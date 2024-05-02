@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-pod-affinity-files
+  labels:
+    purpose: learning
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      devops: '18'
+  template:
+    metadata:
+      name: httpd
+      labels:
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: httpd
+        image: nginx
+        ports:
+        - containerPort: 80
+      affinity:
+        podAntiAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                 matchExpressions:
+                 - key: type
+                   operator: In
+                   values:
+                   - cicd
+              topologyKey: topology.kubernetes.io/zone    

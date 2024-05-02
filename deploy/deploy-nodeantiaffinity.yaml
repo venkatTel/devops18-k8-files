@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-test-no-replicas
+  labels:
+    purpose: learning
+  namespace: prod
+spec:
+  strategy: 
+   type: Recreate
+  replicas: 5
+  selector:
+    matchLabels:
+      devops: '18'
+  template:
+    metadata:
+      name: httpd
+      labels:
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: httpd
+        image: nginx
+        ports:
+        - containerPort: 80
+

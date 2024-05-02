@@ -1,0 +1,31 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-1
+  labels:
+    purpose: learning
+  namespace: k8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      devops: '18'
+  template:
+    metadata:
+      name: httpd
+      labels:
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: 5Mi
+          limits:
+            memory: 10Mi     

@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-test
+  labels:
+    purpose: learning
+  namespace: k8
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      devops: '18'
+  template:
+    metadata:
+      name: httpd
+      labels:
+        devops: '18'
+        company: talent
+        type: create
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:latest
+        ports:
+        - containerPort: 80

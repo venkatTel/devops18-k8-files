@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mynginx-1-apply
+  labels:
+    devops: '18'
+    company: talent
+    type: apply
+spec:
+  containers: 
+  - name: nginx18
+    image: nginx:1.19.1
+    ports:
+    - containerPort: 80
